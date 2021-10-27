@@ -140,43 +140,7 @@ public class HelloApplication extends Application {
 
         beq = new Button("=");
         beq.setMinWidth(BUTTON_WIDTH);
-        beq.setOnAction(actionEvent -> {
-            String[] equation = inputText.trim().split("\\s+");
-            double operand1 = Double.parseDouble(equation[0]);
-
-            if (equation.length == 3) {
-                double operand2 = Double.parseDouble(equation[2]);
-
-                switch (equation[1]) {
-                    case "+" -> resultDouble = operand1 + operand2;
-                    case "-" -> resultDouble = operand1 - operand2;
-                    case "*" -> resultDouble = operand1 * operand2;
-                    case "/" -> {
-                        if (operand2 == 0) {
-                            resultDouble = Double.MIN_VALUE;
-                        }
-                        else {
-                            resultDouble = operand1 / operand2;
-                        }
-                    }
-                }
-
-            }
-            else {
-                resultDouble = operand1;
-            }
-
-            if (resultDouble == Double.MIN_VALUE) {
-                inputText = "Error";
-            }
-            else {
-                inputText = "" + resultDouble;
-            }
-            inputField.setText(inputText);
-
-            num1IsSet = false;
-            resIsSet = true;
-        });
+        beq.setOnAction(actionEvent -> doCalc());
 
         bclear = new Button("C");
         bclear.setMinWidth(BUTTON_WIDTH);
@@ -189,9 +153,7 @@ public class HelloApplication extends Application {
 
         bdot = new Button(".");
         bdot.setMinWidth(BUTTON_WIDTH);
-        bdot.setOnAction(actionEvent -> {
-            enterNumber(".");
-        });
+        bdot.setOnAction(actionEvent -> enterNumber("."));
 
         col1.getChildren().addAll(b7, b4, b1, b0);
         col2.getChildren().addAll(b8, b5, b2, bdot);
@@ -214,6 +176,43 @@ public class HelloApplication extends Application {
         }
         inputText += num;
         inputField.setText(inputText);
+    }
+
+    private void doCalc() {
+        String[] equation = inputText.trim().split("\\s+");
+        double operand1 = Double.parseDouble(equation[0]);
+
+        if (equation.length == 3) {
+            double operand2 = Double.parseDouble(equation[2]);
+
+            switch (equation[1]) {
+                case "+" -> resultDouble = operand1 + operand2;
+                case "-" -> resultDouble = operand1 - operand2;
+                case "*" -> resultDouble = operand1 * operand2;
+                case "/" -> {
+                    if (operand2 == 0) {
+                        resultDouble = Double.MIN_VALUE;
+                    }
+                    else {
+                        resultDouble = operand1 / operand2;
+                    }
+                }
+            }
+        }
+        else {
+            resultDouble = operand1;
+        }
+
+        if (resultDouble == Double.MIN_VALUE) {
+            inputText = "Error";
+        }
+        else {
+            inputText = "" + resultDouble;
+        }
+        inputField.setText(inputText);
+
+        num1IsSet = false;
+        resIsSet = true;
     }
 
     public static void main(String[] args) {
