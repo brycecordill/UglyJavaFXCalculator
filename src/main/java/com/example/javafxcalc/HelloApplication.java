@@ -11,11 +11,31 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, bp, bs, bd, bm, beq, bclear, bdot;
+    // Separate lines because sonarcloud...
+    Button b0;
+    Button b1;
+    Button b2;
+    Button b3;
+    Button b4;
+    Button b5;
+    Button b6;
+    Button b7;
+    Button b8;
+    Button b9;
+    Button bp;
+    Button bs;
+    Button bd;
+    Button bm;
+    Button beq;
+    Button bclear;
+    Button bdot;
     Label inputField;
-    String num1 = "", num2 = "", inputText = "";
+    String num1 = "";
+    String num2 = "";
+    String inputText = "";
     double resultDouble;
-    boolean num1IsSet = false, resIsSet = false;
+    boolean num1IsSet = false;
+    boolean resIsSet = false;
     static final int BUTTON_WIDTH = 30;
 
     @Override
@@ -122,29 +142,28 @@ public class HelloApplication extends Application {
         beq.setMinWidth(BUTTON_WIDTH);
         beq.setOnAction(actionEvent -> {
             String[] equation = inputText.trim().split("\\s+");
-            double num1 = Double.parseDouble(equation[0]);
+            double operand1 = Double.parseDouble(equation[0]);
 
             if (equation.length == 3) {
-                double num2 = Double.parseDouble(equation[2]);
+                double operand2 = Double.parseDouble(equation[2]);
 
                 switch (equation[1]) {
-                    case "+" -> resultDouble = num1 + num2;
-                    case "-" -> resultDouble = num1 - num2;
-                    case "*" -> resultDouble = num1 * num2;
+                    case "+" -> resultDouble = operand1 + operand2;
+                    case "-" -> resultDouble = operand1 - operand2;
+                    case "*" -> resultDouble = operand1 * operand2;
                     case "/" -> {
-                        if (num2 == 0) {
+                        if (operand2 == 0) {
                             resultDouble = Double.MIN_VALUE;
-                            System.out.println("Can't divide by 0");
                         }
                         else {
-                            resultDouble = num1 / num2;
+                            resultDouble = operand1 / operand2;
                         }
                     }
                 }
 
             }
             else {
-                resultDouble = num1;
+                resultDouble = operand1;
             }
 
             if (resultDouble == Double.MIN_VALUE) {
