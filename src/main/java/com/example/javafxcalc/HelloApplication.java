@@ -202,20 +202,6 @@ public class HelloApplication extends Application {
                     resultDouble = operand1 / operand2;
                 }
             }
-            /*
-            switch (equation[1]) {
-                case "+" -> resultDouble = operand1 + operand2;
-                case "-" -> resultDouble = operand1 - operand2;
-                case "*" -> resultDouble = operand1 * operand2;
-                case "/" -> {
-                    if (operand2 == 0) {
-                        resultDouble = Double.MIN_VALUE;
-                    }
-                    else {
-                        resultDouble = operand1 / operand2;
-                    }
-                }
-            } */
         }
         else {
             resultDouble = operand1;
