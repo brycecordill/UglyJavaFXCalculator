@@ -185,6 +185,24 @@ public class HelloApplication extends Application {
         if (equation.length == 3) {
             double operand2 = Double.parseDouble(equation[2]);
 
+            if (equation[1].equals("+")) {
+                resultDouble = operand1 + operand2;
+            }
+            else if (equation[1].equals("-")) {
+                resultDouble = operand1 - operand2;
+            }
+            else if (equation[1].equals("*")) {
+                resultDouble = operand1 * operand2;
+            }
+            else if (equation[1].equals("/")) {
+                if (operand2 == 0) {
+                    resultDouble = Double.MIN_VALUE;
+                }
+                else {
+                    resultDouble = operand1 / operand2;
+                }
+            }
+            /*
             switch (equation[1]) {
                 case "+" -> resultDouble = operand1 + operand2;
                 case "-" -> resultDouble = operand1 - operand2;
@@ -197,7 +215,7 @@ public class HelloApplication extends Application {
                         resultDouble = operand1 / operand2;
                     }
                 }
-            }
+            } */
         }
         else {
             resultDouble = operand1;
