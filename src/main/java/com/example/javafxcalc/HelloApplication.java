@@ -29,6 +29,7 @@ public class HelloApplication extends Application {
     Button beq;
     Button bclear;
     Button bdot;
+    Button blog10;
     Label inputField;
     String num1 = "";
     String num2 = "";
@@ -36,7 +37,7 @@ public class HelloApplication extends Application {
     double resultDouble;
     boolean num1IsSet = false;
     boolean resIsSet = false;
-    static final int BUTTON_WIDTH = 30;
+    static final int BUTTON_WIDTH = 60;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -138,6 +139,18 @@ public class HelloApplication extends Application {
             inputField.setText(inputText);
         });
 
+        blog10 = new Button("log10");
+        blog10.setMinWidth(BUTTON_WIDTH);
+        blog10.setOnAction(actionEvent -> {
+            if (num1IsSet) {
+                return;
+            }
+            num1 += " log10";
+            num1IsSet = true;
+            inputText += " log10";
+            inputField.setText(inputText);
+        });
+
         beq = new Button("=");
         beq.setMinWidth(BUTTON_WIDTH);
         beq.setOnAction(actionEvent -> doCalc());
@@ -156,7 +169,7 @@ public class HelloApplication extends Application {
         bdot.setOnAction(actionEvent -> enterNumber("."));
 
         col1.getChildren().addAll(b7, b4, b1, b0);
-        col2.getChildren().addAll(b8, b5, b2, bdot);
+        col2.getChildren().addAll(b8, b5, b2, bdot, blog10);
         col3.getChildren().addAll(b9, b6, b3, beq);
         col4.getChildren().addAll(bclear, bp, bs, bm, bd);
 
@@ -202,6 +215,9 @@ public class HelloApplication extends Application {
                     resultDouble = operand1 / operand2;
                 }
             }
+        }
+        else if (equation.length == 2 && equation[1].equals("log10")) {
+            resultDouble = Math.log10(operand1);
         }
         else {
             resultDouble = operand1;
